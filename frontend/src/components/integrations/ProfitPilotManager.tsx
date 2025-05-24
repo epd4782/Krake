@@ -13,9 +13,25 @@ const ProfitPilotManager: React.FC<ProfitPilotManagerProps> = ({
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [strategies, setStrategies] = useState([]);
-  const [apiKeys, setApiKeys] = useState([]);
-  const [trades, setTrades] = useState([]);
+  type StrategyConfig = {
+  id: string;
+  name: string;
+  description: string;
+  type: string;
+  isActive: boolean;
+  config: {
+    gridLevels: number;
+    gridSpacing: number;
+    takeProfit: number;
+    stopLoss: number;
+    maxTrades: number;
+    timeframes: string[];
+    rsiOversold?: number;
+  };
+};
+
+const [strategies, setStrategies] = useState<StrategyConfig[]>([]);
+
   const [statistics, setStatistics] = useState<any>(null);
   const [activeStrategy, setActiveStrategy] = useState<any>(null);
   const { currentWorkspace } = useWorkspace();
